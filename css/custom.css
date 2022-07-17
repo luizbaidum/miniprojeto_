@@ -1,0 +1,12 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#div-login {
+    border: 2px solid black;
+    width: 30%;
+    min-width: 300px;
+    text-align: center;
+}
