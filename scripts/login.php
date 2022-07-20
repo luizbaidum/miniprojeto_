@@ -16,6 +16,7 @@ $retorno = $stm->fetch(PDO::FETCH_OBJ);
 //$retorno é um objeto!!!!!!!
 
 if($retorno):
+	$_SESSION['id'] = $retorno->id;
 	$_SESSION['login'] = $retorno->nome;
 	$_SESSION['acesso'] = $retorno->acesso;
 	$_SESSION['logado'] = 1;

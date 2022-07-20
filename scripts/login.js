@@ -13,7 +13,7 @@ $("#form-login").on("submit", function(event){
 		success :  function(response){						
 			if(response.codigo == "1"){	
                 $("#login-alert").css('display', 'none');
-				window.location.href = "https://www.google.com";
+				window.location.href = "home.php";
 			}
 			else{			
 				$("#alerta").css('display', 'block');
