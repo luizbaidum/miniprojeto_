@@ -1,3 +1,9 @@
+body {
+    width: 80%;
+    margin: 1% auto;
+    padding: 1%;
+}
+
 .container {
     width: 100%;
     display: flex;
@@ -9,4 +15,14 @@
     width: 30%;
     min-width: 300px;
     text-align: center;
+}
+
+#barrinha {
+    width: 100%;
+    border: 2px solid black;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: aliceblue;
+    font-size: 19px;
 }
