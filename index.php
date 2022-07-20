@@ -10,8 +10,8 @@
                 <span>Bem vindo ao miniprojeto!</span>
                 <form method="post" id="form-login"> 
                     <p> 
-                        <label for="nome_login">Nome/login</label>
-                        <input id="nome_login" name="nome-login" required="required" type="text" placeholder="Entre com seu login">
+                        <label for="login">Nome/login</label>
+                        <input id="login" name="login" required="required" type="text" placeholder="Entre com seu login">
                     </p>
                     
                     <p> 
@@ -22,11 +22,16 @@
                     <p> 
                         <input type="submit" id="btn-login" value="Logar"> 
                     </p>
+                    <div id="alerta">
+                        <span id="mensagem"></span>
+                    </div>
                 </form>
             </div>
         </div>    
     </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="scripts/CRUD-login.js"></script>
+    <script src="scripts/login.js"></script>
 </html>
+
+//lembrar que não podem existir dois nomes iguais de usuarios

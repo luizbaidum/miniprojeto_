@@ -1,28 +1,34 @@
 <?php
 
-echo 'aqui';
+require_once '../server/conectar.php';
 
-/*
-$email = (isset($_POST['email'])) ? $_POST['email'] : '' ;
-$senha = (isset($_POST['senha'])) ? $_POST['senha'] : '' ;
+$login = (isset($_POST['login'])) ? $_POST['login'] : '' ;
+$senha = (isset($_POST['passw'])) ? $_POST['passw'] : '' ;
 
-$sql = 'SELECT id, nome, senha, email FROM tab_usuario WHERE email = ? AND status = ? LIMIT 1';
-$stm = $conexao->prepare($sql);
-$stm->bindValue(1, $email);
-$stm->bindValue(2, 'A');
+$sql = 'SELECT id, nome, password, acesso FROM usuarios WHERE nome = ? AND password = ?';
+$stm = $con->prepare($sql);
+$stm->bindValue(1, $login);
+$stm->bindValue(2, $senha);
+//passa os valores das variáveis pra dentro da $sql montada
+
 $stm->execute();
 $retorno = $stm->fetch(PDO::FETCH_OBJ);
+//$retorno é um objeto!!!!!!!
 
-$_SESSION['id'] = $retorno->id;
-	$_SESSION['nome'] = $retorno->nome;
-	$_SESSION['email'] = $retorno->email;
-	$_SESSION['tentativas'] = 0;
-	$_SESSION['logado'] = 'SIM';
+if($retorno):
+	$_SESSION['login'] = $retorno->nome;
+	$_SESSION['acesso'] = $retorno->acesso;
+	$_SESSION['logado'] = 1;
+else:
+	$_SESSION['logado'] = 0;
+endif;
 
-if ($_SESSION['logado'] == 'SIM'):
-	$retorno = array('codigo' => 1, 'mensagem' => 'Logado com sucesso!');
-	echo json_encode($retorno);
+if ($_SESSION['logado'] == 1):
+	$resposta = array('codigo' => 1, 'mensagem' => 'Logado com sucesso!');
+	echo json_encode($resposta);
 	exit();
 else:
-	echo 'erro';
+	$resposta = array('codigo' => 0, 'mensagem' => 'Login ou senha errado(s)!');
+	echo json_encode($resposta);
+	exit();
 endif;
