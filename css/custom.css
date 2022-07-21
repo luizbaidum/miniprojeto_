@@ -1,7 +1,18 @@
+body {
+    width: 80%;
+    margin: 1% auto;
+    padding: 1%;
+}
+
+a {
+    text-decoration: none;
+}
+
 .container {
     width: 100%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #div-login {
@@ -9,4 +20,49 @@
     width: 30%;
     min-width: 300px;
     text-align: center;
+    padding: 1%;
+}
+
+#barrinha {
+    width: 100%;
+    border: 2px solid black;
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    background-color: aliceblue;
+    font-size: 19px;
+}
+
+#welcome {
+    margin-top: 5px;
+    height: 20px;
+    padding: 5px 0px;
+    width: 200px;
+    text-align: center;
+}
+
+#menu {
+    margin-top: 5px;
+    width: 50%;
+    min-height: 310px;
+    border: 2px solid black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#usuarios, #cadastro, #produtos {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: cornsilk;
+    border: 1px solid pink;
+    font-size: 1.3em;
+    padding-left: 15px;
+}
+
+#usuarios:hover, #cadastro:hover, #produtos:hover {
+    background-color: rgb(236, 216, 133);
+    border: 1px solid red;
 }
