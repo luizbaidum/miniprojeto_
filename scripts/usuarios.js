@@ -1,7 +1,7 @@
 //Lista
 $('#main-usuarios-a').ready(function() {
 
-    var linha = '<tr> <td><input type="radio" name="usuario" class="id" value=""></td> <td class="nome"></td> <td class="passw"></td> <td class="acesso"></td> </tr>'
+    var linha = '<tr> <td><input type="radio" name="usuario" class="usuarios-id"></td> <td class="usuarios-nome"></td> <td class="usuarios-passw"></td> <td class="usuarios-acesso"></td> </tr>'
 
     $.ajax({
 
@@ -13,11 +13,35 @@ $('#main-usuarios-a').ready(function() {
         dataType: 'json',
         success: function(response) {
 
-            response.forEach(function(usuario) {
+            jQuery.each(response, function(i, val) {
 
                 $('#table-usuarios').append(linha);
 
-                $('.nome').append('teste');
+                $('.usuarios-id').attr('id', function(i) {
+                    return 'id-usuarios-id-' + i;
+                });
+
+//arrumar css desta tela, q quebra se a diminuo
+
+                $('#id-usuarios-id-'+i).val(val.id);
+         
+                $('.usuarios-nome').attr('id', function(i) {
+                    return 'id-usuarios-nome-' + i;
+                });
+
+                $('#id-usuarios-nome-'+i).append(val.nome);
+
+                $('.usuarios-passw').attr('id', function(i) {
+                    return 'id-usuarios-passw-' + i;
+                });
+
+                $('#id-usuarios-passw-'+i).append(val.passw);
+
+                $('.usuarios-acesso').attr('id', function(i) {
+                    return 'id-usuarios-acesso-' + i;
+                });
+
+                $('#id-usuarios-acesso-'+i).append(val.acesso);
            });
         }
     })
