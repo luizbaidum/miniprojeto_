@@ -66,3 +66,26 @@ a {
     background-color: rgb(236, 216, 133);
     border: 1px solid red;
 }
+
+table {
+    margin-top: 10px;
+    border: 2px solid black;
+    padding: 1px;
+}
+
+table td {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+#botoes {
+    width: 400px;
+    margin: 5px auto;
+    display: flex;
+    justify-content: center;
+}
+
+#botoes button {
+    width: 25%;
+    margin: 2px 3px;
+}
