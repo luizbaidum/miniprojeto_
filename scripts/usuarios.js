@@ -1,6 +1,8 @@
 //Lista
 $('#main-usuarios-a').ready(function() {
 
+    var linha = '<tr> <td><input type="radio" name="usuario" class="id" value=""></td> <td class="nome"></td> <td class="passw"></td> <td class="acesso"></td> </tr>'
+
     $.ajax({
 
         type: 'POST',
@@ -10,7 +12,13 @@ $('#main-usuarios-a').ready(function() {
         },
         dataType: 'json',
         success: function(response) {
-           
+
+            response.forEach(function(usuario) {
+
+                $('#table-usuarios').append(linha);
+
+                $('.nome').append('teste');
+           });
         }
     })
 });
