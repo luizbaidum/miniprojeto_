@@ -28,15 +28,25 @@ if(in_array('total', $_POST)):
         exit();
     
     else:
-        $resposta = array('codigo' => 0);
+        $resposta = array('codigo' => 0, 'mensagem' => 'Usuários não carregados');
         echo json_encode($resposta);
         exit();
         
-    endif;    
-
-else:
-
-    echo '<pre>';
-    print_r($_POST);
-
+    endif;
 endif;
+
+if(in_array('editar', $_POST)):
+
+    $id = explode('=', $_POST['data']);
+
+    $sql = "SELECT id, nome, password, acesso FROM usuarios WHERE id = ?";
+    $stm = $con->prepare($sql);
+    $stm->bindValue(1, $id[1]);
+
+    $stm->execute();
+
+    $retorno = $stm->fetch(PDO::FETCH_OBJ);
+
+    echo json_encode($retorno);
+    exit();
+endif;    

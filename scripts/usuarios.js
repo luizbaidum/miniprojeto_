@@ -1,7 +1,7 @@
-//Lista
+//Lista de usuários cadastrados
 $('#main-usuarios-a').ready(function() {
 
-    var linha = '<tr> <td><input type="radio" name="usuario" class="usuarios-id"></td> <td class="usuarios-nome"></td> <td class="usuarios-passw"></td> <td class="usuarios-acesso"></td> </tr>'
+    var linha = '<tr> <td><input type="radio" name="usuarios-id" class="usuarios-id"></td> <td class="usuarios-nome"></td> <td class="usuarios-passw"></td> <td class="usuarios-acesso"></td> </tr>'
 
     $.ajax({
 
@@ -13,65 +13,72 @@ $('#main-usuarios-a').ready(function() {
         dataType: 'json',
         success: function(response) {
 
-            jQuery.each(response, function(i, val) {
+            if(response.codigo == 0){
 
-                $('#table-usuarios').append(linha);
+                $('#table-usuarios').append(response.mensagem);
+            } else {
 
-                $('.usuarios-id').attr('id', function(i) {
-                    return 'id-usuarios-id-' + i;
-                });
+                jQuery.each(response, function(i, val) {
 
-//arrumar css desta tela, q quebra se a diminuo
-
-                $('#id-usuarios-id-'+i).val(val.id);
-         
-                $('.usuarios-nome').attr('id', function(i) {
-                    return 'id-usuarios-nome-' + i;
-                });
-
-                $('#id-usuarios-nome-'+i).append(val.nome);
-
-                $('.usuarios-passw').attr('id', function(i) {
-                    return 'id-usuarios-passw-' + i;
-                });
-
-                $('#id-usuarios-passw-'+i).append(val.passw);
-
-                $('.usuarios-acesso').attr('id', function(i) {
-                    return 'id-usuarios-acesso-' + i;
-                });
-
-                $('#id-usuarios-acesso-'+i).append(val.acesso);
-           });
-        }
+                    $('#table-usuarios').append(linha);
+    
+                    $('.usuarios-id').attr('id', function(i) {
+                        return 'id-usuarios-id-' + i;
+                    });
+    
+                    $('#id-usuarios-id-'+i).val(val.id);
+             
+                    $('.usuarios-nome').attr('id', function(i) {
+                        return 'id-usuarios-nome-' + i;
+                    });
+    
+                    $('#id-usuarios-nome-'+i).append(val.nome);
+    
+                    $('.usuarios-passw').attr('id', function(i) {
+                        return 'id-usuarios-passw-' + i;
+                    });
+    
+                    $('#id-usuarios-passw-'+i).append(val.passw);
+    
+                    $('.usuarios-acesso').attr('id', function(i) {
+                        return 'id-usuarios-acesso-' + i;
+                    });
+    
+                    $('#id-usuarios-acesso-'+i).append(val.acesso);
+               });
+            }
+        }            
     })
 });
 
-//Novo
+//DIV Novo
 
 
-//Editar
+//DIV Editar
 $("#form-usuarios").on("submit", function(event){
 
     event.preventDefault();
-	//cancela o envio do formulário (o que recarregaria a página) até obter a resposta. Estou certo?
 
-	var data = $("#form-usuarios").serialize();
-			
+    var data = $("#form-usuarios").serialize();
+		
 	$.ajax({
 		type : 'POST',
 		url  : 'scripts/usuarios.php',
-		data : data,
+		data : {
+            data,
+            listagem: 'editar'
+        },
 		dataType: 'json',
 		success :  function(response){						
-			if(response.codigo == "1"){	
-                $("#login-alert").css('display', 'none');
-				window.location.href = "home.php";
-			}
-			else{			
-				$("#alerta").css('display', 'block');
-				$("#mensagem").html('<strong>Login ou senha errado(s)!</strong>');
-			}
+			$('#form-edit').css('display', 'block');
+
+            $('#usuario-id').val(response.id);
+            
+            $('#usuario-nome').val(response.nome);
+
+            $('#usuario-passw').val(response.password);
+
+            $('#usuario-acesso').val(response.acesso);
 		}
 	});
 });
