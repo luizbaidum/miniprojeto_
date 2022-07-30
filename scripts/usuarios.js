@@ -1,7 +1,9 @@
 //Lista de usuários cadastrados
 $('#main-usuarios-a').ready(function() {
 
-    var linha = '<tr> <td><input type="radio" name="usuarios-id" class="usuarios-id"></td> <td class="usuarios-nome"></td> <td class="usuarios-passw"></td> <td class="usuarios-acesso"></td> </tr>'
+    var linha = '<tr> <td><input type="radio" name="seleciona_este[]"></td> <td class="usuarios-nome"></td> <td class="usuarios-passw"></td> <td class="usuarios-acesso"></td> </tr>'
+
+    let seleciona_este = document.getElementsByName('seleciona_este[]');
 
     $.ajax({
 
@@ -21,12 +23,8 @@ $('#main-usuarios-a').ready(function() {
                 jQuery.each(response, function(i, val) {
 
                     $('#table-usuarios').append(linha);
-    
-                    $('.usuarios-id').attr('id', function(i) {
-                        return 'id-usuarios-id-' + i;
-                    });
-    
-                    $('#id-usuarios-id-'+i).val(val.id);
+
+                    seleciona_este[i].value = val.nome;
              
                     $('.usuarios-nome').attr('id', function(i) {
                         return 'id-usuarios-nome-' + i;
@@ -52,7 +50,26 @@ $('#main-usuarios-a').ready(function() {
 });
 
 //DIV Novo
+$("#form-usuarios").on("submit", function(event){
 
+    event.preventDefault();
+
+    let teste = $("#form-usuarios").serialize();
+
+    console.log(teste);
+
+	$.ajax({
+		type : 'POST',
+		url  : 'scripts/usuarios.php',
+		data : {
+            listagem: 'novo'
+        },
+		dataType: 'json',
+		success :  function(response){						
+			$('#form-edit').css('display', 'block');
+		}
+	});
+});
 
 //DIV Editar
 $("#form-usuarios").on("submit", function(event){
@@ -72,9 +89,9 @@ $("#form-usuarios").on("submit", function(event){
 		success :  function(response){						
 			$('#form-edit').css('display', 'block');
 
-            $('#usuario-id').val(response.id);
+            $('#usuario-oldnome').val(response.nome);
             
-            $('#usuario-nome').val(response.nome);
+            $('#usuario-newnome').val(response.nome);
 
             $('#usuario-passw').val(response.password);
 

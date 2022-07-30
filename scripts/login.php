@@ -5,7 +5,7 @@ require_once '../server/conectar.php';
 $login = (isset($_POST['login'])) ? $_POST['login'] : '' ;
 $senha = (isset($_POST['passw'])) ? $_POST['passw'] : '' ;
 
-$sql = 'SELECT id, nome, password, acesso FROM usuarios WHERE nome = ? AND password = ?';
+$sql = 'SELECT nome, password, acesso FROM usuarios2 WHERE nome = ? AND password = ?';
 $stm = $con->prepare($sql);
 $stm->bindValue(1, $login);
 $stm->bindValue(2, $senha);
@@ -18,7 +18,6 @@ $retorno = $stm->fetch(PDO::FETCH_OBJ);
 session_start();
 
 if($retorno):
-	$_SESSION['id'] = $retorno->id;
 	$_SESSION['login'] = $retorno->nome;
 	$_SESSION['acesso'] = $retorno->acesso;
 	$_SESSION['logado'] = 1;

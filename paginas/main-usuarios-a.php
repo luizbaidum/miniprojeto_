@@ -1,5 +1,5 @@
 <main class="container" id="main-usuarios-a">
-
+<!-- exibe usuários cadastrados -->
     <div>
 
         <form id="form-usuarios" method="post">
@@ -14,17 +14,21 @@
             </table>
 
             <div id="botoes">
-                <button type="submit" name="novo">Novo</button> <button type="submit" name="editar">Editar</button> <button type="submit" name="excluir">Excluir</button>
+                <button type="submit" name="novo" value="novo">Novo</button> <button type="submit" name="editar">Editar</button> <button type="submit" name="excluir">Excluir</button>
             </div>
         </form>
     </div>
+
+    <!-- tabela arrumada de forma a não permitir nomes duplicados. arrumei os códigos para se ajustar a nova tabela. Faltam = botao cancelar e fazer se parar novo de editar de deletar. tentar fazer reconhecer qual botao estou clicando. -->
+    
+    <!-- edit de usuário selecionado -->
     <div>
 
         <form id="form-edit" method="post">
 
-            <input type="hidden" name="usuario-id" id="usuario-id" value="">
+            <input type="hidden" name="usuario-oldnome" id="usuario-oldnome" value="">
 
-            <input type="text" name="usuario-nome" id="usuario-nome" value="">
+            <input type="text" name="usuario-newnome" id="usuario-newnome" value="">
 
             <input type="text" name="usuario-passw" id="usuario-passw" value="">
 

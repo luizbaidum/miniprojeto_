@@ -4,7 +4,7 @@ require_once '../server/conectar.php';
 
 if(in_array('total', $_POST)):
 
-    $sql = 'SELECT id, nome, password, acesso FROM usuarios';
+    $sql = 'SELECT nome, password, acesso FROM usuarios2';
     $stm = $con->prepare($sql);
 
     $stm->execute();
@@ -16,7 +16,6 @@ if(in_array('total', $_POST)):
         $i = 0;
 
         foreach($retorno as $usuario) {
-            $resposta[$i]['id'] = $usuario->id;
             $resposta[$i]['nome'] = $usuario->nome;
             $resposta[$i]['passw'] = $usuario->password;
             $resposta[$i]['acesso'] = $usuario->acesso;
@@ -37,11 +36,11 @@ endif;
 
 if(in_array('editar', $_POST)):
 
-    $id = explode('=', $_POST['data']);
+    $nome = explode('=', $_POST['data']);
 
-    $sql = "SELECT id, nome, password, acesso FROM usuarios WHERE id = ?";
+    $sql = "SELECT nome, password, acesso FROM usuarios2 WHERE nome = ?";
     $stm = $con->prepare($sql);
-    $stm->bindValue(1, $id[1]);
+    $stm->bindValue(1, $nome[1]);
 
     $stm->execute();
 
