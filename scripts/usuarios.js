@@ -50,13 +50,9 @@ $('#main-usuarios-a').ready(function() {
 });
 
 //DIV Novo
-$("#form-usuarios").on("submit", function(event){
+$("#novo").on("click", function(event){
 
     event.preventDefault();
-
-    let teste = $("#form-usuarios").serialize();
-
-    console.log(teste);
 
 	$.ajax({
 		type : 'POST',
@@ -65,14 +61,24 @@ $("#form-usuarios").on("submit", function(event){
             listagem: 'novo'
         },
 		dataType: 'json',
-		success :  function(response){						
-			$('#form-edit').css('display', 'block');
+		success :  function(){						
+			$('#form-crud').css('display', 'block');
+
+            $('#usuario-operacao').val('novo');
+
+            $('#usuario-oldnome').val(null);
+            
+            $('#usuario-newnome').val(null);
+
+            $('#usuario-passw').val(null);
+
+            $('#usuario-acesso').val(null);
 		}
 	});
 });
 
-//DIV Editar
-$("#form-usuarios").on("submit", function(event){
+//DIV Editar 
+$("#editar").on("click", function(event){
 
     event.preventDefault();
 
@@ -87,7 +93,9 @@ $("#form-usuarios").on("submit", function(event){
         },
 		dataType: 'json',
 		success :  function(response){						
-			$('#form-edit').css('display', 'block');
+			$('#form-crud').css('display', 'block');
+
+            $('#usuario-operacao').val('editar');
 
             $('#usuario-oldnome').val(response.nome);
             
@@ -100,4 +108,25 @@ $("#form-usuarios").on("submit", function(event){
 	});
 });
 
-//Deletar
+//DIV Excluir
+$("#excluir").on("click", function(event){
+
+    event.preventDefault();
+
+    var data = $("#form-usuarios").serialize();
+		
+	$.ajax({
+		type : 'POST',
+		url  : 'scripts/usuarios.php',
+		data : {
+            data,
+            listagem: 'excluir'
+        },
+		dataType: 'json',
+		success :  function(response){
+            
+            //confirma deleção?
+
+		}
+	});
+});

@@ -2,6 +2,7 @@
 
 require_once '../server/conectar.php';
 
+//lista
 if(in_array('total', $_POST)):
 
     $sql = 'SELECT nome, password, acesso FROM usuarios2';
@@ -34,7 +35,15 @@ if(in_array('total', $_POST)):
     endif;
 endif;
 
-if(in_array('editar', $_POST)):
+//CRUDs
+if(in_array('novo', $_POST)):
+
+    $retorno = true;
+
+    echo json_encode($retorno);
+    exit();
+
+elseif(in_array('editar', $_POST)):
 
     $nome = explode('=', $_POST['data']);
 
@@ -48,4 +57,9 @@ if(in_array('editar', $_POST)):
 
     echo json_encode($retorno);
     exit();
+    
+elseif(in_array('excluir', $_POST)):
+
+    echo json_encode('a');
+    exit();   
 endif;    

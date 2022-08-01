@@ -17,5 +17,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="scripts/usuarios.js"></script>
-    <script src="scripts/editar.js"></script>
+    <script src="scripts/usuarios-CRUD.js"></script>
 </html>

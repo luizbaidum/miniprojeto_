@@ -14,17 +14,19 @@
             </table>
 
             <div id="botoes">
-                <button type="submit" name="novo" value="novo">Novo</button> <button type="submit" name="editar">Editar</button> <button type="submit" name="excluir">Excluir</button>
+                <button name="novo" id="novo">Novo</button> <button name="editar" id="editar">Editar</button> <button name="excluir" id="excluir">Excluir</button>
             </div>
         </form>
     </div>
 
-    <!-- tabela arrumada de forma a não permitir nomes duplicados. arrumei os códigos para se ajustar a nova tabela. Faltam = botao cancelar e fazer se parar novo de editar de deletar. tentar fazer reconhecer qual botao estou clicando. -->
+    <!-- Faltam = botao cancelar e fazer se parar novo de editar de deletar. leia usuarios-crud.php  -->
     
-    <!-- edit de usuário selecionado -->
+    <!-- formulário para CRUD de usuário selecionado -->
     <div>
 
-        <form id="form-edit" method="post">
+        <form id="form-crud" method="post">
+
+            <input type="hidden" name="usuario-operacao" id="usuario-operacao" value="">
 
             <input type="hidden" name="usuario-oldnome" id="usuario-oldnome" value="">
 
@@ -39,7 +41,7 @@
             </select>
 
             <div id="botoes">
-                <button type="submit" name="salvar">Salvar</button> <button type="submit" name="cancelar">Cancelar</button>
+                <button id="salvar">Salvar</button> <button id="cancelar">Cancelar</button>
             </div>
         </form>
 

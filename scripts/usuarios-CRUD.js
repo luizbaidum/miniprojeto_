@@ -1,13 +1,18 @@
-$("#form-edit").on("submit", function(event){
+$("#salvar").on("click", function(event){
 
     event.preventDefault();
 
-    var data = $("#form-edit").serialize();
+	let operacao = $('#usuario-operacao').val();
+
+    let data = $("#form-crud").serialize();
 		
 	$.ajax({
 		type : 'POST',
-		url  : 'scripts/editar.php',
-		data : data,
+		url  : 'scripts/usuarios-CRUD.php',
+		data : {
+				operacao,
+				data,
+			},
 		dataType: 'json',
 		success :  function(response){
             if(response.codigo == 1) {
