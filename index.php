@@ -33,5 +33,3 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="scripts/login.js"></script>
 </html>
-
-//lembrar que não podem existir dois nomes iguais de usuarios
