@@ -8,7 +8,7 @@
         <a href="usuarios.php">
             <div id="usuarios">Usuários</div>
         </a>
-        <!-- Se F = só pode atualizar a si mesmo / Se A = vê lista de usuários, pode criar novo usuário, pode apagar usuário e atualizar a si mesmo -->
+        
         <a href="cadastro.php">
             <div id="cadastro">Cadastro de Produtos</div>
         </a>

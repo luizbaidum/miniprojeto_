@@ -10,6 +10,7 @@
 
         <?php if ($acesso == 0)
                 require 'paginas/main-usuarios-f.php';
+
               else
                 require 'paginas/main-usuarios-a.php';
         ?>
