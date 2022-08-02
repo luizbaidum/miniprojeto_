@@ -3,7 +3,7 @@
 require_once '../server/conectar.php';
 
 //lista usuários cadastrados
-if(in_array('total', $_POST)):
+if($_POST['listagem'] == 'total') {
 
     $sql = 'SELECT nome, password, acesso FROM usuarios2';
     $stm = $con->prepare($sql);
@@ -33,7 +33,28 @@ if(in_array('total', $_POST)):
         exit();
         
     endif;
-endif;
+} else if($_POST['listagem'] == 'unico') {
+
+    $nome = ($_POST['usuario']);
+
+    $sql = 'SELECT nome, password, acesso FROM usuarios2 WHERE nome = ?';
+    $stm = $con->prepare($sql);
+    $stm->bindValue(1, $nome);    
+
+    $stm->execute();
+    $retorno = $stm->fetch(PDO::FETCH_OBJ);
+
+    if($retorno):
+
+        echo json_encode($retorno);
+        exit();
+    else:
+
+        $retorno = ['codigo' => 0, 'mensagem' => 'Falha ao carregar usuário.'];
+        echo json_encode($retorno);
+        exit();
+    endif;
+}
 
 //DIVs CRUDs
 if(in_array('novo', $_POST)):
