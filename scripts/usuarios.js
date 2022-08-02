@@ -82,7 +82,7 @@ $("#editar").on("click", function(event){
 
     event.preventDefault();
 
-    var data = $("#form-usuarios").serialize();
+    let data = $("#form-usuarios").serialize();
 		
 	$.ajax({
 		type : 'POST',
@@ -108,25 +108,8 @@ $("#editar").on("click", function(event){
 	});
 });
 
-//DIV Excluir
-$("#excluir").on("click", function(event){
+//botão cancelar
+$('cancelar').on('click', function() {
 
-    event.preventDefault();
-
-    var data = $("#form-usuarios").serialize();
-		
-	$.ajax({
-		type : 'POST',
-		url  : 'scripts/usuarios.php',
-		data : {
-            data,
-            listagem: 'excluir'
-        },
-		dataType: 'json',
-		success :  function(response){
-            
-            //confirma deleção?
-
-		}
-	});
-});
+    $('form-crud').style('display', 'hidden');
+})

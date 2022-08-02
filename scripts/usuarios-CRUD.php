@@ -2,67 +2,93 @@
 
 require_once '../server/conectar.php';
 
-//aqui q aqui vou precisar colocar explode ou decodificar o json
-//conferir o q estou recebendo
+if(isset($_POST['operacao'])):
 
-//Novo Usuário
-if($_POST['operacao'] == 'novo'):
+    $dados_usuario = explode('&', $_POST['data']);
 
-    $newNome = $_POST['usuario-newnome'];
-    $passw = $_POST['usuario-passw'];
-    $acesso = $_POST['usuario-acesso'];
+    foreach($dados_usuario as $chave => $valor) {
 
-    $sql = "INSERT INTO usuarios2 (nome, password, acesso) VALUES (?, ?, ?)";
+        $dado_usuario[$chave] = explode('=', $valor);
+    }
 
-    $stm = $con->prepare($sql);
-    $stm->bindValue(1, $newNome);
-    $stm->bindValue(2, $passw);
-    $stm->bindValue(3, $acesso);
+    $operacao = $dado_usuario[0][1];
+    $old_nome = $dado_usuario[1][1];
+    $new_nome = $dado_usuario[2][1];
+    $passw = $dado_usuario[3][1];
+    $acesso = $dado_usuario[4][1];
 
-    $stm->execute();
+    //Novo Usuário
+    if($_POST['operacao'] == 'novo'):
 
-    //Verifica se insert/update teve sucesso!!
-    if($stm->rowCount() > 0):
+        $sql = "INSERT INTO usuarios2 (nome, password, acesso) VALUES (?, ?, ?)";
 
-        $resposta = array('codigo' => 1, 'mensagem' => 'Novo usuário cadastrado com sucesso');
-    else:
+        $stm = $con->prepare($sql);
+        $stm->bindValue(1, $new_nome);
+        $stm->bindValue(2, $passw);
+        $stm->bindValue(3, $acesso);
+    
+        $stm->execute();
+    
+        //Verifica se insert/update teve sucesso!!
+        if($stm->rowCount() > 0):
+    
+            $resposta = array('codigo' => 1, 'mensagem' => 'Novo usuário cadastrado com sucesso');
+        else:
+    
+            $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao cadastrar novo usuário. Provavelmente já existe este nome na base de dados');
+        endif;
+    
+        echo json_encode($resposta);
+        exit();
 
-        $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao cadastrar novo usuário. Provavelmente já existe este nome na base de dados');
+        //Edição de Usuário
+    elseif($_POST['operacao'] == 'editar'):
+
+            $sql = "UPDATE usuarios2
+                    SET nome = ?, password = ?, acesso = ?
+                    WHERE nome = ?; 
+                ";
+        $stm = $con->prepare($sql);
+        $stm->bindValue(1, $new_nome);
+        $stm->bindValue(2, $passw);
+        $stm->bindValue(3, $acesso);
+        $stm->bindValue(4, $old_nome);
+
+        $stm->execute();
+
+        //Verifica se insert/update teve sucesso!!
+        if($stm->rowCount() > 0):
+
+            $resposta = array('codigo' => 1, 'mensagem' => 'Usuário atualizado com sucesso');
+        else:
+
+            $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao atualizar usuário. Provavelmente já existe este nome na base de dados');
+        endif;
+
+        echo json_encode($resposta);
+        exit();
     endif;
 
-    echo json_encode($resposta);
-    exit();
-endif;  
+//Deleção de Usuário   
+else:
 
-//Edição de Usuário
-if($_POST['operacao'] == 'editar'):
+    $nome = $_POST['seleciona_este'][0];
+    
+    $sql = "DELETE from usuarios2 WHERE nome = ?";
 
-    $oldNome = $_POST['usuario-oldnome'];
-    $newNome = $_POST['usuario-newnome'];
-    $passw = $_POST['usuario-passw'];
-    $acesso = $_POST['usuario-acesso'];
-
-    $sql = "UPDATE usuarios2
-            SET nome = ?, password = ?, acesso = ?
-            WHERE nome = ?; 
-        ";
     $stm = $con->prepare($sql);
-    $stm->bindValue(1, $newNome);
-    $stm->bindValue(2, $passw);
-    $stm->bindValue(3, $acesso);
-    $stm->bindValue(4, $oldNome);
-
+    $stm->bindValue(1, $nome);
+    
     $stm->execute();
-
-    //Verifica se insert/update teve sucesso!!
+    
     if($stm->rowCount() > 0):
-
-        $resposta = array('codigo' => 1, 'mensagem' => 'Usuário atualizado com sucesso');
+    
+        $resposta = array('codigo' => 1, 'mensagem' => 'Usuário deletado com sucesso');
     else:
-
-        $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao atualizar usuário. Provavelmente já existe este nome na base de dados');
+    
+        $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao deletar usuário.');
     endif;
-
+    
     echo json_encode($resposta);
-    exit();
-endif;  
+    exit();  
+endif;

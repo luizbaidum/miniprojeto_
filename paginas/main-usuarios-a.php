@@ -18,11 +18,11 @@
             </div>
         </form>
     </div>
-
-    <!-- Faltam = botao cancelar e fazer se parar novo de editar de deletar. leia usuarios-crud.php  -->
     
     <!-- formulário para CRUD de usuário selecionado -->
     <div>
+
+        <span id="confirma-exclusao"></span>
 
         <form id="form-crud" method="post">
 
