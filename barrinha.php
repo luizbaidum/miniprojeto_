@@ -5,7 +5,10 @@
 <div id="barrinha">
 
     <span id="nome">Usuário logado: <?= $nome?></span>
-    <a href="sair.php">Sair</a>
 
+    <span>
+        <a href="home.php">Home</a> |
+        <a href="sair.php">Sair</a>
+    </span>
 </div>
 

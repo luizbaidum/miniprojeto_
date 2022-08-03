@@ -51,7 +51,7 @@ a {
     flex-direction: column;
 }
 
-#usuarios, #cadastro, #produtos {
+#usuarios, #cadastro-produtos, #produtos {
     height: 100px;
     display: flex;
     justify-content: space-around;
@@ -62,13 +62,25 @@ a {
     padding-left: 15px;
 }
 
-#usuarios:hover, #cadastro:hover, #produtos:hover {
+#usuarios:hover, #cadastro-produtos:hover, #produtos:hover {
     background-color: rgb(236, 216, 133);
     border: 1px solid red;
 }
 
-#form-usuarios {
+#form-usuarios, #form-cadastro-produtos {
     margin: 0 auto;
+}
+
+#form-cadastro-produtos {
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+#form-cadastro-produtos div {
+    text-align: center;
+    margin: 10px;
+    width: 300px;
 }
 
 #form-CRUD {
