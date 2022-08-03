@@ -13,6 +13,7 @@ a {
     display: flex;
     align-items: center;
     flex-direction: column;
+    min-width: 500px;
 }
 
 #div-login {
@@ -31,6 +32,7 @@ a {
     justify-content: space-between;
     background-color: aliceblue;
     font-size: 19px;
+    min-width: 500px;
 }
 
 #welcome {
@@ -100,13 +102,35 @@ table td {
     text-align: center;
 }
 
-#botoes {
+.botoes {
     margin: 5px auto;
     display: flex;
     justify-content: center;
 }
 
-#botoes button {
+.botoes button {
     width: 25%;
     margin: 2px 3px;
+}
+
+.lista-produtos {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card-produtos {
+    width: 250px;
+    height: 170px;
+    margin: 8px;
+    border: 2px solid purple;
+}
+
+.produto {
+    width: 200px;
+    height: 30px;
+    margin: auto;
+    text-align: center;
+    background-color: rgb(243, 158, 222);
 }

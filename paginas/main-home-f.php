@@ -12,10 +12,10 @@
         <a href="cadastro-produtos.php">
             <div id="cadastro-produtos">Cadastro de Produtos</div>
         </a>
-        <!-- F e A fazem a mesma coisa = cadastram produtos -->
+        
         <a href="produtos.php">
             <div id="produtos">Lista de Produtos Cadastrados</div>
-        </a>
+        </a><!-- começar este -->
         <!-- F só visualiza produtos cadastrados / Se a visualiza produtos e pode apagar e deletar -->
     </div>
 </main>

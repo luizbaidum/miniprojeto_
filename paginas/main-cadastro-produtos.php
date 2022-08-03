@@ -26,7 +26,7 @@
             <input type="number" min="1" step="any" name="produto-qtd" id="produto-qtd" value="">
         </div>
 
-        <div id="botoes">
+        <div class="botoes">
             <button id="salvar">Salvar</button> <button id="cancelar">Cancelar</button>
         </div>
     </form>
