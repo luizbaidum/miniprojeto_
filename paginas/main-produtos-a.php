@@ -1,29 +1,6 @@
 <main class="container lista-produtos" id="main-produtos-a">
-<!-- exibe produtos cadastrados -->
-    <div class="card-produtos">
 
-        <div class="produto codigo">Código: <span>001</span></div>
-
-        <div class="produto nome">Nome: <span>Teste</span></div>
-
-        <div class="produto valor">Valor: R$ <span>200.00</span></div>
-
-        <div class="produto qtd">Qtd. disponível: <span>5</span></div>
-
-        <form class="botoes" id="form-produtos">
-
-            <input type="hidden" class="codigo-produto">
-
-            <button id="usar">Usar 1</button>
-
-            <button id="editar">Editar este</button>
-
-            <button id="excluir">Excluir este</button>
-        </form>
-    </div>
-    
-    <!-- formulário para CRUD de usuário selecionado -->
-    <div>
+    <!-- <div>
 
         <span id="confirma-exclusao"></span>
 
@@ -49,5 +26,5 @@
         </form>
 
         <div id="erro"></div>
-    </div>
+    </div> -->
 </main>

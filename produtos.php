@@ -17,6 +17,6 @@
     </body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="scripts/usuarios.js"></script>
-    <script src="scripts/usuarios-CRUD.js"></script>
+    <script src="scripts/produtos.js"></script>
+    <script src="scripts/produtos-CRUD.js"></script>
 </html>
