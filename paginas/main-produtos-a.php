@@ -1,30 +1,4 @@
 <main class="container lista-produtos" id="main-produtos-a">
 
-    <!-- <div>
-
-        <span id="confirma-exclusao"></span>
-
-        <form id="form-crud" method="post">
-
-            <input type="hidden" name="usuario-operacao" id="usuario-operacao" value="">
-
-            <input type="hidden" name="usuario-oldnome" id="usuario-oldnome" value="">
-
-            <input type="text" name="usuario-newnome" id="usuario-newnome" value="">
-
-            <input type="text" name="usuario-passw" id="usuario-passw" value="">
-
-            <select name="usuario-acesso" id="usuario-acesso" value="">
-
-                <option value="0">Comum</option>
-                <option value="1">Adm</option>
-            </select>
-
-            <div class="botoes">
-                <button id="salvar">Salvar</button> <button id="cancelar">Cancelar</button>
-            </div>
-        </form>
-
-        <div id="erro"></div>
-    </div> -->
+    <div id="area-editar"> </div>
 </main>

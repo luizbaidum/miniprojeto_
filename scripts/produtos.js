@@ -21,7 +21,7 @@ $(document).ready(function() {
 
                     produto.push('<div class="card-produtos"> <div id="infos-'+i+'"><div class="produto codigo" id="id-codigo-'+i+'">Código: <span>'+v.codigo+'</span></div><div class="produto nome" id="nome-'+i+'">Nome: <span>'+v.nome+'</span></div><div class="produto valor" id="valor-'+i+'">Valor: R$ <span>'+v.valor+'</span></div><div class="produto qtd" id="id-qtd-'+i+'">Qtd. disponível: <span>'+v.qtd+'</span></div></div><div id="formADM-'+i+'"></div>');
 
-                    formularinho.push('<form class="botoes" id="form-produtos-'+i+'"> <input type="hidden" class="codigo-produto" value='+v.codigo+'> <button class="usar">Usar 1</button> <button class="editar">Editar este</button> <button class="excluir">Excluir este</button> </form>');
+                    formularinho.push('<form class="botoes" id='+i+'> <input type="hidden" value="'+v.codigo+'" name="este"> <button class="usar">Usar 1</button> <button class="editar">Editar este</button> <button class="excluir">Excluir este</button> </form>');
                 });
 
                 if(document.getElementById('main-produtos-a')) {
@@ -45,3 +45,28 @@ $(document).ready(function() {
 		}
 	});
 })
+
+//Construir div para Editar produto
+$(document).on('click', '.usar', function(event) {
+
+    event.preventDefault();
+
+    let form = $(this).parent('form');
+    let data = form.serialize();
+
+    $.ajax({
+        method: 'post',
+        url: 'scripts/produtos.php',
+        data: {
+            listagem: 'editar',
+            data
+        },
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+        }
+    })
+});
+
+//continuar daqui
+//fazer aparecer a div com as infos trazidas e os botoes salvar e cancelar
