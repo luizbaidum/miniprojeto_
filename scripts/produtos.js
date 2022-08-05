@@ -1,69 +1,47 @@
-var teste = ['a', 'b'];
+//Produz a lista de produtos
+$(document).ready(function() {
 
-let teste44 = [];
+    var produto = [];
 
-$.each(teste, function(i, v) {
+    var formularinho = [];
 
-    teste44.push('<div class="card-produtos"> <div id="infos-'+i+'"><div class="produto codigo" id="id-codigo-'+i+'">Código: <span></span></div><div class="produto nome" id="nome-'+i+'">Nome: <span></span></div><div class="produto valor" id="valor-'+i+'">Valor: R$ <span></span></div><div class="produto qtd" id="id-qtd-'+i+'">Qtd. disponível: <span></span></div></div> <form class="botoes" id="form-produtos-'+i+'"> <input type="hidden" class="codigo-produto" value='+i+'> <button class="usar">Usar 1</button> <button class="editar">Editar este</button> <button class="excluir">Excluir este</button> </form>');
+    $.ajax({
+        method: 'POST',
+        url: 'scripts/produtos.php',
+        data: {
+            listagem: 'total',
+        },
+        dataType: 'json',
+        success :  function(response){
+            if(response) {
+
+                let produtos = response;
+
+                $.each(produtos, function(i, v) {
+
+                    produto.push('<div class="card-produtos"> <div id="infos-'+i+'"><div class="produto codigo" id="id-codigo-'+i+'">Código: <span>'+v.codigo+'</span></div><div class="produto nome" id="nome-'+i+'">Nome: <span>'+v.nome+'</span></div><div class="produto valor" id="valor-'+i+'">Valor: R$ <span>'+v.valor+'</span></div><div class="produto qtd" id="id-qtd-'+i+'">Qtd. disponível: <span>'+v.qtd+'</span></div></div><div id="formADM-'+i+'"></div>');
+
+                    formularinho.push('<form class="botoes" id="form-produtos-'+i+'"> <input type="hidden" class="codigo-produto" value='+v.codigo+'> <button class="usar">Usar 1</button> <button class="editar">Editar este</button> <button class="excluir">Excluir este</button> </form>');
+                });
+
+                if(document.getElementById('main-produtos-a')) {
+
+                    $('#main-produtos-a').append(produto);
+
+                    let contador = ('.card-produtos').length;
+
+                    for(n = 0; contador>=n; n++) {
+
+                        $('#formADM-'+n).append(formularinho[n]);
+                    }
+                } else {
+                
+                    $('#main-produtos-f').append(produto);
+                }
+            } else {
+
+                alert("Falhar ao carregar produtos. Recarregue a página.");
+            }						
+		}
+	});
 })
-
-//esta cria a visão da lista para administradores
-/*function listaAdm(v) 
-{
-    $('#main-produtos-a').append(html_card);
-
-    let basico = $('.card-produtos').append(html_infos);
-
-    let finalizar = basico.append(html_form);
-
-    finalizar+='</div>';  
-    
-    $('.card-produtos').attr('id', function(i, v) {
-        return 'id-card-produtos-' + i;
-    });
-
-    $('.codigo').attr('id', function(i, v) {
-        return 'id-codigo-' + i;
-    });
-
-    $('.nome').attr('id', function(i, v) {
-        return 'id-nome-' + i;
-    });
-
-    $('.valor').attr('id', function(i, v) {
-        return 'id-valor-' + i;
-    });
-
-    $('.qtd').attr('id', function(i, v) {
-        return 'id-qtd-' + i;
-    });
-}
-
-//esta cria a visão da lista para usuários comuns
-function listaComum() 
-{
-    $('#main-produtos-f').append(html_card);
-
-    let basico = $('.card-produtos').append(html_infos);
-
-    basico+='</div>';
-}*/
-
-if(document.getElementById('main-produtos-a')) {
-
-    $('#main-produtos-a').append(teste44);
-
-    $('.codigo span').text('pai');
-
-
-
-} else {
-
-    listaComum();
-}
-
-
-
-
-
-
