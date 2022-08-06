@@ -26,8 +26,8 @@ $("#salvar").on("click", function(event){
 		success :  function(response){
             if(response.codigo == 'cadastrado') {
 
+                $('#form-cadastro-produtos input').val("");
                 alert('Produto: "'+ response.nome +'" cadastrado com sucesso!');
-                $('#form-cadastro-produtos input').val("")
             } else if(response.codigo == 'editado') {
                 
                 $('#form-edita-produtos').css('display', 'none');
@@ -45,23 +45,30 @@ $(document).on('click', '.excluir', function(event) {
 
     event.preventDefault();
 
-    let form = $(this).parent('form');
-    let data = form.serialize();
+    let = confirma_exclusao = confirm("Confirma a exclusão do produto?");
 
-    $.ajax({
-        method: 'post',
-        url: 'scripts/produtos-CRUD.php',
-        data: data,
-        dataType: 'json',
-        success: function(response) {
-            if(response.codigo == 1) {
+    if(confirma_exclusao) {
 
-                alert('Produto excluído com sucesso');
-                window.location.href = "produtos.php";
-            } else {
+        let form = $(this).parent('form');
+        let data = form.serialize();
 
-                alert('Erro excluir Produto. Por favor recarregue o sistema e tente novamente.')
+        $.ajax({
+            method: 'post',
+            url: 'scripts/produtos-CRUD.php',
+            data: data,
+            dataType: 'json',
+            success: function(response) {
+                if(response.codigo == 1) {
+    
+                    alert('Produto excluído com sucesso');
+                    window.location.href = "produtos.php";
+                } else {
+    
+                    alert('Erro excluir Produto. Por favor recarregue o sistema e tente novamente.')
+                }
             }
-        }
-    })
+        })
+    } else {
+        null;
+    }
 });

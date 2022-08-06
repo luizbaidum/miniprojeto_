@@ -40,7 +40,7 @@ $(document).ready(function() {
                 }
             } else {
 
-                alert("Falhar ao carregar produtos. Recarregue a página.");
+                $('#erro').html('Erro ao carregar produtos, por favor reinicie o sistema');
             }						
 		}
 	});

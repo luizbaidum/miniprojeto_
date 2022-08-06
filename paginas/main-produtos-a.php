@@ -32,4 +32,5 @@
             <input type="hidden" id="oldCodigo" name="oldCodigo" value="">
         </form>
     </div>
+    <div id="erro"></div>
 </main>
