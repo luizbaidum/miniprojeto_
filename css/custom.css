@@ -120,9 +120,16 @@ table td {
     flex-wrap: wrap;
 }
 
-.card-produtos {
+#main-produtos-a .card-produtos {
     width: 250px;
     height: 170px;
+    margin: 8px;
+    border: 2px solid purple;
+}
+
+#main-produtos-f .card-produtos {
+    width: 250px;
+    height: 130px;
     margin: 8px;
     border: 2px solid purple;
 }
