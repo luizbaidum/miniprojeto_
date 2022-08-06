@@ -13,7 +13,7 @@
                 </tr>
             </table>
 
-            <div id="botoes">
+            <div class="botoes">
                 <button name="novo" id="novo">Novo</button> <button name="editar" id="editar">Editar</button> <button name="excluir" id="excluir">Excluir</button>
             </div>
         </form>
@@ -40,7 +40,7 @@
                 <option value="1">Adm</option>
             </select>
 
-            <div id="botoes">
+            <div class="botoes">
                 <button id="salvar">Salvar</button> <button id="cancelar">Cancelar</button>
             </div>
         </form>
