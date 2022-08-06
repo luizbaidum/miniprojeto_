@@ -58,12 +58,18 @@ $(document).on('click', '.usar', function(event) {
         method: 'post',
         url: 'scripts/produtos.php',
         data: {
-            listagem: 'editar',
+            listagem: 'usar',
             data
         },
         dataType: 'json',
         success: function(response) {
-            console.log(response);
+            if(response.codigo == 1) {
+
+                window.location.href = "produtos.php";
+            } else {
+
+                alert('Erro ao utilizar uma unidade do produto. Por favor recarregue o sistema.')
+            }
         }
     })
 });

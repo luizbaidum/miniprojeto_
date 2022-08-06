@@ -37,25 +37,26 @@ if($_POST['listagem'] == 'total') {
 }
 
 //Consultar todos os produtos
-if($_POST['listagem'] == 'editar') {
+if($_POST['listagem'] == 'usar') {
 
     $codigo = explode('=', $_POST['data']);
 
-    $sql = 'SELECT codigo, nome, valor, qtd FROM produtos WHERE codigo = ?';
+    $sql = 'UPDATE produtos SET qtd = (qtd - 1) WHERE codigo = ?';
     $stm = $con->prepare($sql);
     $stm->bindValue(1, $codigo[1]);  
 
-    $stm->execute();
-    $retorno = $stm->fetch(PDO::FETCH_OBJ);
+    $executa = $stm->execute();
 
-    if($retorno):
+    if($executa):
 
-        echo json_encode($retorno);
+        $executa = ['codigo' => 1, 'mensagem' => 'sucesso'];
+
+        echo json_encode($executa);
         exit();
     
     else:
-        $retorno = null;
-        echo json_encode($retorno);
+        $executa = ['codigo' => 0, 'mensagem' => 'erro'];
+        echo json_encode($executa);
         exit();
         
     endif;
