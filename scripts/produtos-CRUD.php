@@ -76,21 +76,21 @@ if(isset($_POST['operacao'])):
 //Deleção de Produto   
 else:
 
-    $nome = $_POST['seleciona_este'][0];
+    $codigo = $_POST['este'];
     
-    $sql = "DELETE from usuarios2 WHERE nome = ?";
+    $sql = "DELETE from produtos WHERE codigo = ?";
 
     $stm = $con->prepare($sql);
-    $stm->bindValue(1, $nome);
+    $stm->bindValue(1, $codigo);
     
     $stm->execute();
     
     if($stm->rowCount() > 0):
     
-        $resposta = array('codigo' => 1, 'mensagem' => 'Usuário deletado com sucesso');
+        $resposta = array('codigo' => 1, 'mensagem' => 'Produto deletado com sucesso');
     else:
     
-        $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao deletar usuário.');
+        $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao deletar produto.');
     endif;
     
     echo json_encode($resposta);

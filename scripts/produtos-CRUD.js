@@ -39,3 +39,29 @@ $("#salvar").on("click", function(event){
 		}
 	});
 });
+
+//Ação exluir
+$(document).on('click', '.excluir', function(event) {
+
+    event.preventDefault();
+
+    let form = $(this).parent('form');
+    let data = form.serialize();
+
+    $.ajax({
+        method: 'post',
+        url: 'scripts/produtos-CRUD.php',
+        data: data,
+        dataType: 'json',
+        success: function(response) {
+            if(response.codigo == 1) {
+
+                alert('Produto excluído com sucesso');
+                window.location.href = "produtos.php";
+            } else {
+
+                alert('Erro excluir Produto. Por favor recarregue o sistema e tente novamente.')
+            }
+        }
+    })
+});
