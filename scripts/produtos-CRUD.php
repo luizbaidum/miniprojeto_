@@ -32,7 +32,7 @@ if(isset($_POST['operacao'])):
         //Verifica se insert/update teve sucesso!!
         if($stm->rowCount() > 0):
     
-            $resposta = array('codigo' => 1, 'mensagem' => 'Novo produto cadastrado com sucesso', 'nome' => $nome);
+            $resposta = array('codigo' => 'cadastrado', 'mensagem' => 'Novo produto cadastrado com sucesso', 'nome' => $nome);
         else:
     
             $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao cadastrar novo produto. Provavelmente já existe este nome na base de dados');
@@ -41,28 +41,32 @@ if(isset($_POST['operacao'])):
         echo json_encode($resposta);
         exit();
 
-        //Edição de Produto
+    //Edição de Produto
     elseif($_POST['operacao'] == 'editar'):
 
-            $sql = "UPDATE usuarios2
-                    SET nome = ?, password = ?, acesso = ?
-                    WHERE nome = ?; 
+        $oldCodigo = $dado_produto[5][1];
+
+            $sql = "UPDATE produtos
+                    SET codigo = ?, nome = ?, valor = ?, qtd = ?
+                    WHERE codigo = ?; 
                 ";
+
         $stm = $con->prepare($sql);
-        $stm->bindValue(1, $new_nome);
-        $stm->bindValue(2, $passw);
-        $stm->bindValue(3, $acesso);
-        $stm->bindValue(4, $old_nome);
+        $stm->bindValue(1, $codigo);
+        $stm->bindValue(2, $nome);
+        $stm->bindValue(3, $valor);
+        $stm->bindValue(4, $qtd);
+        $stm->bindValue(5, $oldCodigo);
 
         $stm->execute();
 
         //Verifica se insert/update teve sucesso!!
         if($stm->rowCount() > 0):
 
-            $resposta = array('codigo' => 1, 'mensagem' => 'Usuário atualizado com sucesso');
+            $resposta = array('codigo' => 'editado', 'mensagem' => 'Produto atualizado com sucesso');
         else:
 
-            $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao atualizar usuário. Provavelmente já existe este nome na base de dados');
+            $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao atualizar Produto. Provavelmente o código digitado já existe na base de dados');
         endif;
 
         echo json_encode($resposta);
@@ -72,21 +76,21 @@ if(isset($_POST['operacao'])):
 //Deleção de Produto   
 else:
 
-    $nome = $_POST['seleciona_este'][0];
+    $codigo = $_POST['este'];
     
-    $sql = "DELETE from usuarios2 WHERE nome = ?";
+    $sql = "DELETE from produtos WHERE codigo = ?";
 
     $stm = $con->prepare($sql);
-    $stm->bindValue(1, $nome);
+    $stm->bindValue(1, $codigo);
     
     $stm->execute();
     
     if($stm->rowCount() > 0):
     
-        $resposta = array('codigo' => 1, 'mensagem' => 'Usuário deletado com sucesso');
+        $resposta = array('codigo' => 1, 'mensagem' => 'Produto deletado com sucesso');
     else:
     
-        $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao deletar usuário.');
+        $resposta = array('codigo' => 0, 'mensagem' => 'Erro ao deletar produto.');
     endif;
     
     echo json_encode($resposta);

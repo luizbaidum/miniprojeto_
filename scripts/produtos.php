@@ -37,6 +37,31 @@ if($_POST['listagem'] == 'total') {
 }
 
 //Consultar todos os produtos
+if($_POST['listagem'] == 'usar') {
+
+    $codigo = explode('=', $_POST['data']);
+
+    $sql = 'UPDATE produtos SET qtd = (qtd - 1) WHERE codigo = ?';
+    $stm = $con->prepare($sql);
+    $stm->bindValue(1, $codigo[1]);  
+
+    $executa = $stm->execute();
+
+    if($executa):
+
+        $executa = ['codigo' => 1, 'mensagem' => 'sucesso'];
+
+        echo json_encode($executa);
+        exit();
+    
+    else:
+        $executa = ['codigo' => 0, 'mensagem' => 'erro'];
+        echo json_encode($executa);
+        exit();
+        
+    endif;
+}
+
 if($_POST['listagem'] == 'editar') {
 
     $codigo = explode('=', $_POST['data']);
@@ -54,9 +79,8 @@ if($_POST['listagem'] == 'editar') {
         exit();
     
     else:
-        $retorno = null;
-        echo json_encode($retorno);
+        $resposta = null;
+        echo json_encode($resposta);
         exit();
-        
-    endif;
+    endif;    
 }    
