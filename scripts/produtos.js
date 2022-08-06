@@ -46,7 +46,7 @@ $(document).ready(function() {
 	});
 })
 
-//Construir div para Editar produto
+//Função 'usar 1'
 $(document).on('click', '.usar', function(event) {
 
     event.preventDefault();
@@ -74,5 +74,39 @@ $(document).on('click', '.usar', function(event) {
     })
 });
 
-//continuar daqui
-//fazer aparecer a div com as infos trazidas e os botoes salvar e cancelar
+//Alimenta div para Editar produto
+$(document).on('click', '.editar', function(event) {
+
+    event.preventDefault();
+
+    let form = $(this).parent('form');
+    let data = form.serialize();
+
+    $.ajax({
+        method: 'post',
+        url: 'scripts/produtos.php',
+        data: {
+            listagem: 'editar',
+            data
+        },
+        dataType: 'json',
+        success: function(response) {
+            if(response) {
+
+                let produto = response;
+
+                $('#operacao').val('editar');
+                $('#oldCodigo').val(produto.codigo);
+                $('#produto-codigo').val(produto.codigo);
+                $('#produto-nome').val(produto.nome);
+                $('#produto-valor').val(produto.valor);
+                $('#produto-qtd').val(produto.qtd);
+
+                $('#form-edita-produtos').css('display', 'block'); 
+            } else {
+
+                alert('Erro ao carregar produto. Por favor atualize a página e tente novamente.')
+            }
+        }
+    })
+});

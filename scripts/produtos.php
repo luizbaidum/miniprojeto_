@@ -60,4 +60,27 @@ if($_POST['listagem'] == 'usar') {
         exit();
         
     endif;
+}
+
+if($_POST['listagem'] == 'editar') {
+
+    $codigo = explode('=', $_POST['data']);
+
+    $sql = 'SELECT codigo, nome, valor, qtd FROM produtos WHERE codigo = ?';
+    $stm = $con->prepare($sql);
+    $stm->bindValue(1, $codigo[1]);  
+
+    $stm->execute();
+    $retorno = $stm->fetch(PDO::FETCH_OBJ);
+
+    if($retorno):
+
+        echo json_encode($retorno);
+        exit();
+    
+    else:
+        $resposta = null;
+        echo json_encode($resposta);
+        exit();
+    endif;    
 }    

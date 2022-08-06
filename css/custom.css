@@ -141,3 +141,15 @@ table td {
     text-align: center;
     background-color: rgb(243, 158, 222);
 }
+
+#area-editar #form-edita-produtos {
+    margin-top: 10px;
+    border: 2px solid black;
+    display: none;
+    width: 300px;
+    text-align: center;
+}
+
+#area-editar #form-edita-produtos div {
+    padding: 5px;
+}
